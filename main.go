@@ -45,9 +45,9 @@ func add(w http.ResponseWriter, r *http.Request) {
 		resResponse := Response{Success: false, ErrCode: err.Error(), Value: 0}
 		json.NewEncoder(w).Encode(&resResponse)
 	} else {
+		w.WriteHeader(http.StatusOK)
 		resResponse := Response{Success: true, ErrCode: "", Value: a + b}
 		json.NewEncoder(w).Encode(&resResponse)
-		w.WriteHeader(http.StatusOK)
 	}
 }
 func sub(w http.ResponseWriter, r *http.Request) {
@@ -57,9 +57,9 @@ func sub(w http.ResponseWriter, r *http.Request) {
 		resResponse := Response{Success: false, ErrCode: err.Error(), Value: 0}
 		json.NewEncoder(w).Encode(&resResponse)
 	} else {
+		w.WriteHeader(http.StatusOK)
 		resResponse := Response{Success: true, ErrCode: "", Value: a - b}
 		json.NewEncoder(w).Encode(&resResponse)
-		w.WriteHeader(http.StatusOK)
 	}
 }
 func mul(w http.ResponseWriter, r *http.Request) {
