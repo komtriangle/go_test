@@ -27,10 +27,10 @@ func PrepareParameters(r *http.Request) (int, int, error) {
 	if errA != nil || errB != nil {
 		errCode := ""
 		if errA != nil {
-			errCode += errA.Error()
+			errCode += "Parameter a: " + errA.Error()
 		}
 		if errB != nil {
-			errCode += errB.Error()
+			errCode += "Parameter b: " + errB.Error()
 		}
 		return 0, 0, errors.New(errCode)
 	} else {

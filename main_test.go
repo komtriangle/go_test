@@ -3,10 +3,11 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/gorilla/mux"
 	"net/http"
 	"net/http/httptest"
 	"testing"
+
+	"github.com/gorilla/mux"
 )
 
 func Test_Add(t *testing.T) {
@@ -28,6 +29,13 @@ func Test_Add(t *testing.T) {
 		if body != val.Response {
 			t.Errorf("Response is not correct")
 		}
+	}
+	res, _ := http.Get(ts.URL + fmt.Sprintf("/api/add?a=5"))
+	var body Response
+	json.NewDecoder(res.Body).Decode(&body)
+	WantResponse := Response{Success: false, ErrCode: "Parameter b: parameter is emptry; ", Value: 0}
+	if body != WantResponse {
+		t.Errorf("Response is not correct")
 	}
 }
 
@@ -51,6 +59,14 @@ func Test_Sub(t *testing.T) {
 			t.Errorf("Response is not correct")
 		}
 	}
+
+	res, _ := http.Get(ts.URL + fmt.Sprintf("/api/sub?a=5"))
+	var body Response
+	json.NewDecoder(res.Body).Decode(&body)
+	WantResponse := Response{Success: false, ErrCode: "Parameter b: parameter is emptry; ", Value: 0}
+	if body != WantResponse {
+		t.Errorf("Response is not correct")
+	}
 }
 
 func Test_Mul(t *testing.T) {
@@ -73,6 +89,14 @@ func Test_Mul(t *testing.T) {
 			t.Errorf("Response is not correct")
 		}
 	}
+
+	res, _ := http.Get(ts.URL + fmt.Sprintf("/api/mul?a=5"))
+	var body Response
+	json.NewDecoder(res.Body).Decode(&body)
+	WantResponse := Response{Success: false, ErrCode: "Parameter b: parameter is emptry; ", Value: 0}
+	if body != WantResponse {
+		t.Errorf("Response is not correct")
+	}
 }
 
 func Test_Div(t *testing.T) {
@@ -94,5 +118,12 @@ func Test_Div(t *testing.T) {
 		if body != val.Response {
 			t.Errorf("Response is not correct")
 		}
+	}
+	res, _ := http.Get(ts.URL + fmt.Sprintf("/api/div?a=5"))
+	var body Response
+	json.NewDecoder(res.Body).Decode(&body)
+	WantResponse := Response{Success: false, ErrCode: "Parameter b: parameter is emptry; ", Value: 0}
+	if body != WantResponse {
+		t.Errorf("Response is not correct")
 	}
 }
